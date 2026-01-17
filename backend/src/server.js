@@ -1,8 +1,16 @@
 import express from "express";
 import path from "path";
 import {ENV} from "./lib/env.js";
+import cors from "cors";
+
 
 const app = express();
+
+app.use(cors({
+  origin: "https://prepify.vercel.app",
+  credentials: true
+}));
+
 
 const __dirname = path.resolve();  //path.resolve() Returns the absolute path of the current working directory
 
