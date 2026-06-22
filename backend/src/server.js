@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import {ENV} from "./lib/env.js";
 import cors from "cors";
-
+import connectDB from "../src/lib/db.js"
 
 const app = express();
 
@@ -32,6 +32,7 @@ app.get("/books" , (req ,res) => {
 //     res.sendFile(path.join(__dirname , "../frontend" , "dist" , "index.html"))
 // })
 
-app.listen(ENV.PORT, ()=>{
+app.listen(ENV.PORT, ()=> {
     console.log("server is running on port" , ENV.PORT)
+    connectDB();
 })
