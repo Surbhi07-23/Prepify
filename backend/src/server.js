@@ -6,7 +6,7 @@ import {ENV} from "./lib/env.js";
 import cors from "cors";
 
 import connectDB from "../src/lib/db.js"
-import { inngest } from "./lib/inngest.js";
+import { inngest , functions } from "./lib/inngest.js";    //functions = [syncUser , deleteUserFromDB]
 
 const app = express();
 
