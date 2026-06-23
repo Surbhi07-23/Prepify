@@ -1,0 +1,44 @@
+//if new user logs in using clerk this will add that user in mongoose database    same for delete
+
+import {Inngest} from inngest;
+import connectDB from "../src/lib/db.js";
+import User from "../models/User.js"
+
+export const inngest = new Inngest({idd : "prepify"});
+
+const syncUser =    inngest.createFunction(
+    {id:"sync-user"},
+    {event:"cleark/user.created"},
+    async({event}) => {
+        await connectDB();
+
+        const {id , email_addresses , first_name , last_name , image_url} = event.data
+
+        const newUser = {
+            clerkId:id,
+            email:email_addresses[0]?.email_address,
+            name:`${first_name || ""} ${last_name  || ""}` ,
+            profileImage:image_url
+        }
+
+        await User.create(newUser)
+
+        //todo
+    }
+)
+
+const deleteUserFromDB =    inngest.createFunction(
+    {id:"delete-user-from-db"},
+    {event:"cleark/user.deleted"},
+    async({event}) => {
+        await connectDB();
+
+        const {id} = event.data
+
+        await User.deleteOne({clerkId:id})
+
+        //todo
+    }
+)
+
+export const functions = [syncUser , deleteUserFromDB]
