@@ -6,8 +6,9 @@ function App() {
     <>
       <h1>Welcome to prepify</h1>
       <Show when="signed-out">
-        <SignInButton mode='modal'/>
-        <button>Login</button>
+        <SignInButton mode="modal">
+          <button>Login</button>
+        </SignInButton>
       </Show>
       
       <Show when="signed-in">

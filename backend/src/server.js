@@ -1,15 +1,23 @@
 import express from "express";
 import path from "path";
+
+import {serve} from "inngest/express";
 import {ENV} from "./lib/env.js";
 import cors from "cors";
+
 import connectDB from "../src/lib/db.js"
+import { inngest } from "./lib/inngest.js";
 
 const app = express();
 
+app.use(express.json());
+
 app.use(cors({
-  origin: "https://prepify-eight-chi.vercel.app",
+  origin: ENV.CLIENT_URL,
   credentials: true
 }));
+
+app.use("/api/inngest" , serve({client:inngest , functions}))
 
 
 const __dirname = path.resolve();  //path.resolve() Returns the absolute path of the current working directory
