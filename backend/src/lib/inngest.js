@@ -1,10 +1,10 @@
 //if new user logs in using clerk this will add that user in mongoose database    same for delete
 
-import {Inngest} from inngest;
-import connectDB from "../src/lib/db.js";
+import {Inngest} from "inngest";
+import connectDB from "./db.js";
 import User from "../models/User.js"
 
-export const inngest = new Inngest({idd : "prepify"});
+export const inngest = new Inngest({id : "prepify"});
 
 const syncUser =    inngest.createFunction(
     {id:"sync-user"},
