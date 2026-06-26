@@ -6,7 +6,7 @@ import {ENV} from "./lib/env.js";
 import cors from "cors";
 
 import connectDB from "../src/lib/db.js"
-import { inngest , functions } from "./lib/inngest.js";    //functions = [syncUser , deleteUserFromDB]
+import { inngest , inngestFunctions } from "./lib/inngest.js";    //functions = [syncUser , deleteUserFromDB]
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use("/api/inngest" , serve({client:inngest , functions}))
+app.use("/api/inngest" , serve({client:inngest , functions : inngestFunctions}))
 
 
 const __dirname = path.resolve();  //path.resolve() Returns the absolute path of the current working directory
