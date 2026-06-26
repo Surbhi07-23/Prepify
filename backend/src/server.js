@@ -19,7 +19,7 @@ app.use(cors({
 }));
 
 //main inngest sync endpoint
-app.use("/api/inngest" , serve({client:inngest , functions : inngestFunctions}))
+app.all("/api/inngest" , serve({client:inngest , functions : inngestFunctions}))
 
 
 const __dirname = path.resolve();  //path.resolve() Returns the absolute path of the current working directory
