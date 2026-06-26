@@ -15,11 +15,13 @@ app.use(express.json());
 //Enable CORS for vercel client
 app.use(cors({
   origin: ENV.CLIENT_URL,
-  credentials: true
+  credentials: true, 
+  allowedHeaders: ["Content-Type", "Authorization", "X-Inngest-SDK", "X-Inngest-Env", "X-Inngest-Signature"], // Allow SDK system headers explicitly
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }));
 
 //main inngest sync endpoint
-app.all("/api/inngest" , serve({client:inngest , functions : inngestFunctions}))
+app.all("/api/inngest" , serve({client:inngest , functions : inngestFunctions ,servePath: "/api/inngest"}))
 
 
 const __dirname = path.resolve();  //path.resolve() Returns the absolute path of the current working directory
