@@ -31,14 +31,14 @@ app.get("/books" , (req ,res) => {
 })
 
 //making our app ready for deployment
-// if(ENV.NODE_ENV == "production"){
-//     app.use(express.static(path.join(__dirname , "../frontend/dist")));   
-//     // __dirname = backend    ".. " will move it one up that is to intervue folder --> then to frontend and then dist
-// }
+if(ENV.NODE_ENV == "production"){
+    app.use(express.static(path.join(__dirname , "../frontend/dist")));   
+    // __dirname = backend    ".. " will move it one up that is to intervue folder --> then to frontend and then dist
+}
 
-// app.get("/{*any}" , (req , res)=>{    //if any other endpoint other then mentioned here , display the react app
-//     res.sendFile(path.join(__dirname , "../frontend" , "dist" , "index.html"))
-// })
+app.get("/{*any}" , (req , res)=>{    //if any other endpoint other then mentioned here , display the react app
+    res.sendFile(path.join(__dirname , "../frontend" , "dist" , "index.html"))
+})
 
 app.listen(ENV.PORT, ()=> {
     console.log("server is running on port" , ENV.PORT)
